@@ -1,0 +1,7 @@
+plotly.express
+plotly.graph_objects
+pandas
+dash
+dash_core_components
+dash_html_components
+time
