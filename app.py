@@ -39,6 +39,9 @@ readable = mintime.strftime("%m/%d/%Y")
 # Get county-level stats from other file
 county_stats = pd.read_csv("data/counties.csv")
 
+# Read monthly summary data file
+monthly = pd.read_csv("data/month_summary.csv")
+
 # Plot first figure, map of points
 fig = px.scatter_mapbox(data, lat="Latitude", lon="Longitude", hover_name="Date", hover_data=["Town", "Vic Town"],
                         color_discrete_sequence=["white"], zoom=6, height=800)
@@ -64,6 +67,9 @@ fig2 = px.line(data, x='Date', y= 'Incident Count',title='Narcan Deployments Ove
 
 # Third figure, bar chart by county
 fig3 = px.bar(county_stats, x='County', y= 'Incidents',title='Narcan Deployments By County', color = 'Incidents')
+
+# Fourth figure, bar chart by month
+fig4 = px.bar(monthly, x='Month', y= 'Count',title='Narcan Deployments By Month', color = 'Count', color_continuous_scale=px.colors.sequential.Viridis)
 
 
 app.layout = html.Div(children=[
@@ -92,7 +98,9 @@ app.layout = html.Div(children=[
     dcc.Graph(
         figure=fig2),
     dcc.Graph(
-        figure=fig3)
+        figure=fig3),
+    dcc.Graph(
+        figure=fig4)
 ])
 if __name__ == '__main__':
     app.run_server(debug=True)
