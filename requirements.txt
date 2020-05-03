@@ -1,5 +1,4 @@
-plotly.express
-plotly.graph_objects
+plotly
 pandas
 dash
 dash_core_components
